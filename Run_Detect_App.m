@@ -10,8 +10,6 @@ for i = 1:length(Appliance) %#ok<NODEF>
     end
 end
 Appliance = Appliance(match);
-% Offset data to enable edge detection.
-data_Diff = diff(Data); data_Diff_O = [data_Diff(2:end); NaN;];
 
 for state = 1:Appliance.requireState
     % Load Appliance Details for Current State
@@ -72,24 +70,8 @@ for state = 1:Appliance.requireState
     DataStruct(state).state_include = zeros(length(edge_Rise),1)+state;
 end
 
-if Appliance.States > 1
-    [DataStruct] = State_Combine_EventWindow(DataStruct, Appliance);
-    [DataStruct] = State_Combine_Optional(DataStruct, Appliance, data_Diff, data_Diff_O);
-end
-
 DataFinal = DataStruct(end);
 
-if Appliance.requireState > 1
-    for state = 1:Appliance.States-1
-        checkedData = DataStruct(state).state_include > state;
-        fields= fieldnames(DataStruct);
-        for i = 1:numel(fields)
-            Temp = DataStruct(state).(fields{i});
-            Temp2 = [DataFinal.(fields{i}); Temp(checkedData)];
-            DataFinal.(fields{i}) = Temp2;
-        end
-    end
-end
 
 % DataFinal checks
 % Remove signatures based on number of points.

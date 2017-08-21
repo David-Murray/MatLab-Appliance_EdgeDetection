@@ -24,7 +24,7 @@ for i =1:total
 		beg = rising_Edge(i)+1;
 		if (length(Data_Diff) - beg) >= durationLong
 			% Fridge = - 130 -30 -130
-            disp([i,total])
+            disp([i total])
             search_Time = Time > Time(beg+1) & Time < Time(beg+1)+seconds(durationLong);
 			search_Range = Data_Diff(search_Time,1);
 			search_Range_Off = Data_Diff_Offset1(search_Time,1);

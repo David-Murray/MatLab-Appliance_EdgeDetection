@@ -92,28 +92,6 @@ if genFig == 1
     hold off
 end
 
-% Plot all occurences and save to file.
-% Focus image on plot and clear surounding guff
-if genGraphs == 1
-    mkdir(ApplianceType)
-    for img = 1:length(DataFinal.edge_Rise)
-        f = figure('visible','off');
-        hold on
-        plot(Time(DataFinal.edge_Rise(img):DataFinal.edge_Fall(img)),...
-             Data(DataFinal.edge_Rise(img):DataFinal.edge_Fall(img)),...
-             'k');
-        set(gca,...
-            'position',[0 0 1 1],...
-            'units','normalized',...
-            'xticklabel',[],'xtick',[],...
-            'yticklabel',[],'ytick',[],...
-            'Visible','off')
-        folder = ApplianceType;
-        baseFileName =  sprintf('%d.png', img);
-        fullFileName = fullfile(folder, baseFileName);
-        saveas(gcf, fullFileName);
-        close all hidden
-    end
-end
 [Table] = GenTable(DataFinal);
+
 end

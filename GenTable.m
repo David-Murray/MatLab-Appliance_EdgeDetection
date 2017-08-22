@@ -9,5 +9,6 @@ for i = 1:length(DataFinal(end).edge_Rise)
                   DataFinal(end).kWh(i)};
         Table = [Table;newRow;];
 end
+Table.Properties.VariableNames={'rEdge','fEdge','rTime','fTime','Dura','Cons'}
 end
 

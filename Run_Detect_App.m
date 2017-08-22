@@ -21,10 +21,10 @@ for state = 1:Appliance.requireState
     % A larger gap means that the profile is more erratic
     % e.g. Washing Machine spin cycle requires a higher gap
     time_Gap = Appliance.DurationGap(state);
-    
+
     [edge_Rise] = ...
         EdgeDetect_Rise2(Data, pow_Low, pow_High);
-    
+
     [edge_Fall] = ...
         EdgeDetect_Fall2(Time, Data, edge_Rise, pow_Low, ...
         pow_High, dur_Short, dur_Long);
@@ -34,35 +34,35 @@ for state = 1:Appliance.requireState
     Edges(Z,:) = [];
     edge_Rise = Edges(:,1);
     edge_Fall = Edges(:,2);
-    
+
     figure(1)
     plot(Time,Data)
     hold
     plot(Time(edge_Rise),Data(edge_Rise),'bx')
     plot(Time(edge_Fall),Data(edge_Fall),'ro')
     hold
-    
+
     [edge_Rise, edge_Fall] = ...
         Threshold_Cont(edge_Rise, edge_Fall, Time, time_Gap);
-    
+
     figure(2)
     plot(Time,Data)
     hold
     plot(Time(edge_Rise),Data(edge_Rise),'bx')
     plot(Time(edge_Fall),Data(edge_Fall),'ro')
     hold
-    
+
     [edge_Rise, edge_Fall] = ...
         Threshold_Time(edge_Rise, edge_Fall, Time, dur_Short, dur_Long);
-    
+
     figure(3)
     plot(Time,Data)
     hold
     plot(Time(edge_Rise),Data(edge_Rise),'bx')
     plot(Time(edge_Fall),Data(edge_Fall),'ro')
     hold
-    
-    DataStruct(state).edge_Rise = edge_Rise-1;
+
+    DataStruct(state).edge_Rise = edge_Rise;
     DataStruct(state).edge_Fall = edge_Fall;
     DataStruct(state).edge_Diff = ...
         Data(DataStruct(state).edge_Fall)-Data(DataStruct(state).edge_Rise);

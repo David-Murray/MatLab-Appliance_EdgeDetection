@@ -29,7 +29,6 @@ for state = 1:Appliance.requireState
         EdgeDetect_Fall2(Time, Data, edge_Rise, pow_Low, ...
         pow_High, dur_Short, dur_Long);
     % Compensates for the offset in the detection.
-    edge_Rise = edge_Rise + 1;
     Edges = [edge_Rise edge_Fall];
     Z = isnan(Edges(:,2));
     Edges(Z,:) = [];

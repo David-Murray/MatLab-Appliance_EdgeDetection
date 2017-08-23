@@ -44,7 +44,12 @@ for i =1:total
         search_Range_Off2 = D_Diff_Sum_2_Off(search_Time,1);
         fall_E_2 = find(search_Range2 > -max_Pow & search_Range_Off2 < -min_Pow &  search_Range_Off2 > -max_Pow ,1,'first');
         %disp('A')
-        fallingEdge = min(unique([fall_E; fall_E_1; fall_E_2]));
+        fallingEdges = min(unique([fall_E; fall_E_1; fall_E_2]));
+        if isempty(fallingEdges)
+            fallingEdge(i,1) = NaN;
+        else
+            fallingEdge(i,1) = fallingEdges + beg;
+        end
         %make this unique
         %if isempty(fall_E)
             

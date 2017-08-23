@@ -43,7 +43,7 @@ for i =1:total
         if isempty(fallingEdges)
             fallingEdge(i,1) = NaN;
         else
-            fallingEdge(i,1) = fallingEdges + beg;
+            fallingEdge(i,1) = fallingEdges + beg + 3;
         end
     end
 end

@@ -17,6 +17,7 @@ for state = 1:Appliance.requireState
     pow_Low = Appliance.LowPower(state);
     pow_High = Appliance.HighPower(state);
     % Length of an event in seconds, 3600,7200,10800,14400 = 1,2,3,4 hours.
+    seg_Long = Appliance.SegmentLong(state);
     dur_Short = Appliance.DurationShort(state);
     dur_Long = Appliance.DurationLong(state);
     % A larger gap means that the profile is more erratic
@@ -28,7 +29,7 @@ for state = 1:Appliance.requireState
 
     [edge_Fall] = ...
         EdgeDetect_Fall2(Time, Data, edge_Rise, pow_Low, ...
-        pow_High, dur_Long);
+        pow_High, seg_Long);
     % Compensates for the offset in the detection.#
     edge_Rise = edge_Rise -1;
     Edges = [edge_Rise edge_Fall];

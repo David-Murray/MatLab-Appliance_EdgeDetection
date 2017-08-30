@@ -1,5 +1,6 @@
 function [Table] ...
     = Run_Detect_App(Time, Data, ApplianceType, genFig)
+
 % Load Appliance Details
 load('Appliance.mat')
 % Select Appliance
@@ -27,7 +28,7 @@ for state = 1:Appliance.requireState
 
     [edge_Fall] = ...
         EdgeDetect_Fall2(Time, Data, edge_Rise, pow_Low, ...
-        pow_High, dur_Short, dur_Long);
+        pow_High, dur_Long);
     % Compensates for the offset in the detection.#
     edge_Rise = edge_Rise -1;
     Edges = [edge_Rise edge_Fall];

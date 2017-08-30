@@ -1,5 +1,5 @@
 function [fallingEdge] = EdgeDetect_Fall2 ...
-    (Time, Data,rising_Edge, min_Pow, max_Pow, durationShort, durationLong)
+    (Time, Data,rising_Edge, min_Pow, max_Pow, durationLong)
 D_Diff = diff(Data);
 D_Diff_Offset = [D_Diff(2:end); 0;];
 
@@ -16,14 +16,14 @@ D_Diff_Sum_2_Off = [D_Diff_Sum_2(2:end);0;];
 total = length(rising_Edge);
 fallingEdge = NaN(total,1);
 TimeNum = posixtime(Time);
-%disp(size(TimeNum))
-TimeLimit = Time(rising_Edge)+seconds(durationShort) < Time(end);
+TimeLimit = Time(rising_Edge)+seconds(durationLong) < Time(end);
 for i =1:total
     if TimeLimit(i) == 1
         rising_Edges_Sum = sum(D_Diff(rising_Edge(i):rising_Edge(i)+2));
     else
         disp('Detected a bad edge')
-        break
+        fallingEdge(i,1) = NaN;
+        continue
     end
     if rising_Edges_Sum > min_Pow && rising_Edges_Sum < max_Pow
         beg = rising_Edge(i);

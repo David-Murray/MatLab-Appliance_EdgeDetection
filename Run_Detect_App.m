@@ -1,5 +1,5 @@
 function [Table] ...
-    = Run_Detect_App(Time, Data, ApplianceType, genFig)
+    = Run_Detect_App(Time, Data, ApplianceType, genFig, Data_Raw, App_Comb)
 
 % Load Appliance Details
 load('Appliance.mat')
@@ -95,5 +95,9 @@ if genFig == 1
 end
 
 [Table] = GenTable(DataFinal);
-
+for i = 1:height(Table)
+    Table.Sig{i} = Data_Raw(Table.rEdge(i):Table.fEdge(i))';
+    Table.Sig_Time{i} = Time(Table.rEdge(i):Table.fEdge(i))';
+    Table.Sig_AppComb{i} = App_Comb(Table.rEdge(i):Table.fEdge(i))';
+end
 end
